@@ -34,6 +34,14 @@ function onSearchFormSubmit(event) {
     .then(ImagesData => {
       galleryElement.innerHTML = galleryItemsMarkUp(ImagesData);
     })
+    .catch(error => {
+      console.error('Error fetching photos:', error);
+      iziToast.error({
+        title: 'Error',
+        message: 'Failed to fetch photos. Please try again later.',
+        position: 'topRight',
+      });
+    })
     .finally(() => {
       event.target.reset();
       loaderElement.classList.add('is-hidden');
